@@ -2,6 +2,7 @@ import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.scss';
 import Home from './Pages/Home/Home';
+import Layout from './Components/Layout/Layout';
 import List from './Pages/List/List';
 import { CgProfile, CgSearch, CgHeart, CgPlayButtonO } from 'react-icons/cg';
 import { FaHeart } from 'react-icons/fa';
@@ -13,7 +14,10 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" index element={<Home />}></Route>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="list" element={<List />} />
+          </Route>
         </Routes>
       </Router>
     </>

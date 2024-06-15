@@ -1,0 +1,16 @@
+@import '../../Styles/variables.scss';
+
+.frame {
+  border: solid 3px $newTan;
+  border-radius: 5px;
+  background-color: $newTan20;
+  padding: 35px 15px;
+  &.darkFrame {
+    border: solid 3px $orange;
+  }
+  &.hoverableFrame {
+    &:hover {
+      border: solid 3px $orange;
+    }
+  }
+}

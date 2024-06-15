@@ -1,0 +1,16 @@
+@import '../../Styles/variables.scss';
+
+.layout {
+  margin-top: $headerMobileHeight;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - $headerMobileHeight);
+  height: 100%;
+  width: 100%;
+  main {
+    padding: $paddingSmall;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex: 1;
+  }
+}
