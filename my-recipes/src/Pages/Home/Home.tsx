@@ -1,33 +1,22 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import Frame from '../../Components/Frame/Frame';
 import Card from '../../Components/Card/Card';
-import { Recipe } from '../../Models/RecipeModel';
 import styles from './Home.module.scss';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks';
+import { setCarouselRecipes } from '../../Redux/carouselSlice';
+import { processCarouselData } from '../../utils/processData';
 
 export default function Home() {
+  const dispatch = useAppDispatch();
   // interface Tag {
   //   displayName: string;
   //   name: string;
   //   id: number;
   // }
   // const [tags, setTags] = useState<Tag[]>([]);
-  type FeedsResults = {
-    results: {
-      category: string;
-      items: {
-        id: number;
-        thumbnail_url: string;
-        name: string;
-        description: string;
-        sections: { components: { raw_text: string }[] }[];
-        instructions: { display_text: string }[];
-        credits: { name: string }[];
-        video_url: string;
-      }[];
-    }[];
-  };
-  const [rawCardsData, setRawCardsData] = useState<FeedsResults>();
+
+  const carouselCards = useAppSelector((state) => state.carouselRecipes);
 
   useEffect(() => {
     console.log('useEffect');
@@ -44,7 +33,10 @@ export default function Home() {
     axios
       .get('https://tasty.p.rapidapi.com/feeds/list', { params, headers })
       .then((res: AxiosResponse) => {
-        setRawCardsData(res.data);
+        const carouselRecipes = processCarouselData(res);
+        if (carouselRecipes) {
+          dispatch(setCarouselRecipes(carouselRecipes));
+        }
       })
       .catch((e: AxiosError) => {
         console.log('Error trying to retrieve the carousel cards data: ', e);
@@ -52,43 +44,11 @@ export default function Home() {
       });
   }, []);
 
-  const cardsData = useMemo(() => {
-    if (rawCardsData) {
-      const trendingFiltered = rawCardsData.results.filter(
-        (item) => item.category === 'Trending'
-      );
-      const trendingArray = trendingFiltered[0].items;
-      const tempData: Recipe[] = trendingArray.map((cardItem) => {
-        const ingredients = cardItem.sections[0].components.map(
-          (comp) => comp.raw_text
-        );
-        const instructions = cardItem.instructions.map(
-          (instr) => instr.display_text
-        );
-        const credits = cardItem.credits.map((item) => item.name);
-        const recipeInstance = new Recipe(
-          cardItem.id,
-          cardItem.name,
-          cardItem.thumbnail_url,
-          cardItem.description,
-          ingredients,
-          instructions,
-          credits,
-          cardItem.video_url
-        );
-        console.log(recipeInstance);
-        return recipeInstance;
-      });
-
-      return tempData;
-    }
-  }, [rawCardsData]);
-
   return (
     <div className={styles.home}>
-      {cardsData && (
+      {carouselCards && (
         <Frame isBorderDark={true}>
-          <Card recipe={cardsData[0]} />
+          <Card recipe={carouselCards[0]} />
         </Frame>
       )}
     </div>
