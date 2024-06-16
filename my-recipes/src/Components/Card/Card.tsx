@@ -22,3 +22,10 @@ export default function Card({ recipe }: Card) {
     </button>
   );
 }
+
+/*
+ CREATE LAYOUT CONTRAINTS FOR THE CARD:
+ - DESCRIPTION SHOULD HAVE A MAXIMUM SIZE
+ - CARD SHOULD HAVE A FIXED SIZE
+ - IF THERE IS NO DESCRIPTION, PROVIDE THIS INFO
+*/

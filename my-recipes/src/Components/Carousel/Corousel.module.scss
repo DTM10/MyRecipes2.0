@@ -1,0 +1,27 @@
+@import '../../Styles/variables.scss';
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  .navController {
+    padding-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .navBtnsContainer {
+      padding: 2px 10px;
+      background-color: $cardBackgroundColor;
+      border-radius: 5px;
+      button {
+        font-size: 19px;
+        padding: 0 1px;
+        color: $newTan;
+        &.active {
+          color: $orange;
+        }
+      }
+    }
+  }
+}

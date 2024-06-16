@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import Frame from '../../Components/Frame/Frame';
-import Card from '../../Components/Card/Card';
+// import Frame from '../../Components/Frame/Frame';
+// import Card from '../../Components/Card/Card';
+import Carousel from '../../Components/Carousel/Carousel';
 import styles from './Home.module.scss';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks';
@@ -16,7 +17,7 @@ export default function Home() {
   // }
   // const [tags, setTags] = useState<Tag[]>([]);
 
-  const carouselCards = useAppSelector((state) => state.carouselRecipes);
+  // const carouselCards = useAppSelector((state) => state.carouselRecipes);
 
   useEffect(() => {
     console.log('useEffect');
@@ -46,11 +47,12 @@ export default function Home() {
 
   return (
     <div className={styles.home}>
-      {carouselCards && (
+      {/* {carouselCards && (
         <Frame isBorderDark={true}>
           <Card recipe={carouselCards[0]} />
         </Frame>
-      )}
+      )} */}
+      <Carousel />
     </div>
   );
 }
