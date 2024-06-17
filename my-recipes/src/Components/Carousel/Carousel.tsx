@@ -1,39 +1,38 @@
 import styles from './Corousel.module.scss';
 import { useAppSelector } from '../../Redux/hooks';
-import { useMemo, useState, useRef } from 'react';
-import Frame from '../Frame/Frame';
+import { useState, useRef, useEffect, useCallback } from 'react';
+
 import Card from '../Card/Card';
 
 export default function Carousel() {
   const carouselCards = useAppSelector((state) => state.carouselRecipes);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const timeoutRef = useRef<null | number>(null);
-  const nextCard = () => {
-    const newIndex =
-      currentIndex < carouselCards.length - 1 ? currentIndex + 1 : 0;
-    setCurrentIndex(newIndex);
-  };
 
-  const _ = useMemo(() => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+  const nextCard = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex < carouselCards.length - 1 ? prevIndex + 1 : 0;
+      return newIndex;
+    });
+  }, [carouselCards]);
+
+  useEffect(() => {
+    const clearCurrentTimeout = () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
     timeoutRef.current = setTimeout(() => {
+      clearCurrentTimeout();
       nextCard();
-      return () => {
-        if (timeoutRef.current) {
-          clearTimeout(timeoutRef.current);
-        }
-      };
     }, 3000);
-  }, [currentIndex]);
+    return clearCurrentTimeout;
+  }, [currentIndex, nextCard]);
 
   return (
     <div className={styles.carousel}>
-      <Frame isBorderDark={true}>
-        <Card recipe={carouselCards[currentIndex]} />
-      </Frame>
+      <Card recipe={carouselCards[currentIndex]} maxDescriptionSize={200} />
       <div className={styles.navController}>
         <div className={styles.navBtnsContainer}>
           {carouselCards.map((_, index) => (
