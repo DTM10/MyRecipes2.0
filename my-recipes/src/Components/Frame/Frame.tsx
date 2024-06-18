@@ -5,13 +5,23 @@ interface FrameProps {
   children: ReactNode;
   isBorderDark?: boolean;
   isHoverable?: boolean;
+  padding?: { horizontal: string; vertical: string };
+  backgroundColor?: string;
 }
 export default function Frame({
   children,
   isHoverable,
   isBorderDark,
-}: FrameProps) {
+}: // padding,
+// backgroundColor,
+FrameProps) {
   let componentStyle = styles.frame;
+  // const componentStyleObj = padding
+  //   ? {
+  //       padding: `${padding.vertical} ${padding.horizontal}`,
+  //       backgroundColor: backgroundColor ? backgroundColor : undefined,
+  //     }
+  //   : undefined;
   if (isHoverable) {
     componentStyle = `${styles.frame} ${styles.hoverableFrame}`;
   }

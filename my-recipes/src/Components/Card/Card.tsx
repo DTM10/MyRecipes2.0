@@ -22,7 +22,7 @@ export default function Card({ recipe, size, maxDescriptionSize }: Card) {
     <div className={styles.card}>
       <Frame isBorderDark={true}>
         <button
-          className={styles.cardContainer}
+          className={styles.cardBtn}
           onClick={handleCardClick}
           style={size ? { width: size.width, height: size.height } : undefined}
         >
@@ -30,8 +30,10 @@ export default function Card({ recipe, size, maxDescriptionSize }: Card) {
             <div className={styles.imgContainer}>
               <img src={imgURL} alt="card-img" />
             </div>
-            <h3>{title}</h3>
-            <p>{treatedDescription}</p>
+            <div className={styles.textContainer}>
+              <h3>{title}</h3>
+              <p>{treatedDescription}</p>
+            </div>
           </div>
         </button>
       </Frame>

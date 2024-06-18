@@ -1,4 +1,13 @@
 @import '../../Styles/variables.scss';
 
 .home {
+  h2 {
+    padding-top: 25px;
+  }
+  .tagsContainer {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
 }

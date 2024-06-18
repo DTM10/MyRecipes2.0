@@ -9,6 +9,9 @@ body {
   background-color: $backgroundColor;
   font-family: $bodyFont;
   color: $darkGreen;
+  // -webkit-text-fill-color: $darkGreen !important;
+  // -webkit-opacity: 1;
+
   h1 {
     font-size: $h1Mobile;
   }

@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 // Colors
-$backgroundColor: #faf9f6;
-$cardBackgroundColor: #ece3da;
+$backgroundColor: #fff;
+// $backgroundColor: #faf9f6;
+// $cardBackgroundColor: #ece3da;
+$cardBackgroundColor: #fff;
 $orange: #c0521f;
 $newTan: #e8ba99;
-// $newTan30: rgba(232, 186, 153, 0.3);
-$newTan30: #e8ba994d;
+$newTan30: rgba(232, 186, 153, 0.3);
+// $newTan30: #e8ba994d;
 $newTan20: rgba(232, 186, 153, 0.2);
+$newTan10: rgba(232, 186, 153, 0.1);
+$newTan5: rgba(232, 186, 153, 0.05);
 $darkGreen: #373b08;
 $lightGreen: #677100;
-
+$shadowColor: #ece3da;
 // Fonts
 $titleFont: 'Great Vibes', cursive;
 $bodyFont: 'Nunito', sans-serif;

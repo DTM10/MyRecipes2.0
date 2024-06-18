@@ -1,5 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { Recipe } from '../Models/RecipeModel';
+import { TagsResults } from '../Models/TagsResults';
+import { Tag } from '../Models/Tag';
 
 import { FeedsResults } from '../Models/Feeds';
 export const processCarouselData = (rawCarouselData: AxiosResponse) => {
@@ -33,5 +35,24 @@ export const processCarouselData = (rawCarouselData: AxiosResponse) => {
     });
 
     return tempData;
+  }
+};
+
+export const processTagsData = (rawTagsData: AxiosResponse) => {
+  const data: TagsResults = rawTagsData.data;
+  if (data) {
+    const filteredTags = data.results.filter(
+      (item) =>
+        item.type !== 'equipment' ||
+        item.type !== 'business_tags' ||
+        item.type !== 'feature_page' ||
+        item.type !== 'appliance'
+    );
+
+    const tempTags = filteredTags.map((tag) => {
+      return new Tag(tag.display_name, tag.name, tag.id);
+    });
+
+    return tempTags;
   }
 };

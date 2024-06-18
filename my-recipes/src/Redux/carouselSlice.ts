@@ -9,8 +9,6 @@ export const carouselSlice = createSlice({
   initialState,
   reducers: {
     setCarouselRecipes: (_, action: PayloadAction<Recipe[]>) => {
-      console.log('setCarouselRecipes');
-      console.log('setCarouselRecipes payload is: ', action.payload);
       return action.payload;
     },
   },
