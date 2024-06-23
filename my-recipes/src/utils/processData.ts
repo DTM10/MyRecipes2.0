@@ -2,8 +2,9 @@ import { AxiosResponse } from 'axios';
 import { Recipe } from '../Models/RecipeModel';
 import { TagsResults } from '../Models/TagsResults';
 import { Tag } from '../Models/Tag';
-
 import { FeedsResults } from '../Models/Feeds';
+import { ListResults } from '../Models/ListResults';
+
 export const processCarouselData = (rawCarouselData: AxiosResponse) => {
   const data: FeedsResults = rawCarouselData.data;
 
@@ -55,4 +56,32 @@ export const processTagsData = (rawTagsData: AxiosResponse) => {
 
     return tempTags;
   }
+};
+
+export const processListData = (rawListData: AxiosResponse): Recipe[] => {
+  const data: ListResults = rawListData.data;
+
+  if (data) {
+    const processedRecipes = data.results.map((recipe) => {
+      const ingredients = recipe.sections[0].components.map(
+        (ingredient) => ingredient.raw_text
+      );
+      const instructions = recipe.instructions.map(
+        (instruction) => instruction.display_text
+      );
+      const credits = recipe.credits.map((author) => author.name);
+      return new Recipe(
+        recipe.id,
+        recipe.name,
+        recipe.thumbnail_url,
+        recipe.description,
+        ingredients,
+        instructions,
+        credits,
+        recipe.video_url
+      );
+    });
+    return processedRecipes;
+  }
+  return [];
 };

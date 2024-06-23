@@ -2,15 +2,28 @@ import styles from './Card.module.scss';
 import { Recipe } from '../../Models/RecipeModel';
 import { trimString } from '../../utils/stringUtils';
 import Frame from '../Frame/Frame';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { BORDER_VALUES } from '../../Models/Enums';
 
 interface Card {
   recipe: Recipe;
   size?: { width: number; height: number };
   maxDescriptionSize?: number;
+  isListCard: boolean;
+  isLiked?: boolean;
+  border: BORDER_VALUES;
 }
 
-export default function Card({ recipe, size, maxDescriptionSize }: Card) {
+export default function Card({
+  recipe,
+  size,
+  maxDescriptionSize,
+  isListCard,
+  isLiked,
+  border,
+}: Card) {
   const { id, title, imgURL, description } = { ...recipe };
+
   const handleCardClick = () => {
     console.log('card clicked with recipe id: ', id);
   };
@@ -18,9 +31,13 @@ export default function Card({ recipe, size, maxDescriptionSize }: Card) {
   const treatedDescription = maxDescriptionSize
     ? trimString(description, maxDescriptionSize)
     : description;
+
   return (
     <div className={styles.card}>
-      <Frame isBorderDark={true}>
+      <Frame
+        isBorderDark={border === BORDER_VALUES.DARK}
+        isHoverable={border === BORDER_VALUES.HOVERABLE}
+      >
         <button
           className={styles.cardBtn}
           onClick={handleCardClick}
@@ -31,7 +48,10 @@ export default function Card({ recipe, size, maxDescriptionSize }: Card) {
               <img src={imgURL} alt="card-img" />
             </div>
             <div className={styles.textContainer}>
-              <h3>{title}</h3>
+              <div className={styles.cardTitleContainer}>
+                <h3>{title}</h3>
+                {isListCard && <>{isLiked ? <FaHeart /> : <FaRegHeart />}</>}
+              </div>
               <p>{treatedDescription}</p>
             </div>
           </div>
@@ -40,10 +60,3 @@ export default function Card({ recipe, size, maxDescriptionSize }: Card) {
     </div>
   );
 }
-
-/*
- CREATE LAYOUT CONTRAINTS FOR THE CARD:
- - DESCRIPTION SHOULD HAVE A MAXIMUM SIZE
- - CARD SHOULD HAVE A FIXED SIZE
- - IF THERE IS NO DESCRIPTION, PROVIDE THIS INFO
-*/

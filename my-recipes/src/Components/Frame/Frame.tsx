@@ -12,16 +12,8 @@ export default function Frame({
   children,
   isHoverable,
   isBorderDark,
-}: // padding,
-// backgroundColor,
-FrameProps) {
+}: FrameProps) {
   let componentStyle = styles.frame;
-  // const componentStyleObj = padding
-  //   ? {
-  //       padding: `${padding.vertical} ${padding.horizontal}`,
-  //       backgroundColor: backgroundColor ? backgroundColor : undefined,
-  //     }
-  //   : undefined;
   if (isHoverable) {
     componentStyle = `${styles.frame} ${styles.hoverableFrame}`;
   }

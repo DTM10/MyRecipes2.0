@@ -28,8 +28,15 @@
       }
       .textContainer {
         padding: 5px 0;
-        h3 {
-          padding-bottom: 5px;
+        .cardTitleContainer {
+          display: grid;
+          grid-template-columns: 1fr 25px;
+          font-size: 20px;
+          color: $orange;
+          h3 {
+            padding-bottom: 5px;
+            color: $darkGreen;
+          }
         }
       }
     }

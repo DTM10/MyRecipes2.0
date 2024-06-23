@@ -32,7 +32,7 @@ export default function Carousel() {
 
   return (
     <div className={styles.carousel}>
-      <Card recipe={carouselCards[currentIndex]} maxDescriptionSize={200} />
+      <Card recipe={carouselCards[currentIndex]} maxDescriptionSize={120} />
       <div className={styles.navController}>
         <div className={styles.navBtnsContainer}>
           {carouselCards.map((_, index) => (

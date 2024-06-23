@@ -1,0 +1,13 @@
+@import '../../Styles/variables.scss';
+
+.listComponent {
+  .listContainer {
+    ul {
+      padding-top: 25px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+}
