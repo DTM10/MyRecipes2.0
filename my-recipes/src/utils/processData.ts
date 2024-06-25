@@ -45,9 +45,9 @@ export const processTagsData = (rawTagsData: AxiosResponse) => {
   if (data) {
     const filteredTags = data.results.filter(
       (item) =>
-        item.type !== 'equipment' ||
-        item.type !== 'business_tags' ||
-        item.type !== 'feature_page' ||
+        item.type !== 'equipment' &&
+        item.type !== 'business_tags' &&
+        item.type !== 'feature_page' &&
         item.type !== 'appliance'
     );
 
