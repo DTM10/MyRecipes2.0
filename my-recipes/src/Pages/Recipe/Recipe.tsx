@@ -1,8 +1,8 @@
 import styles from './Recipe.module.scss';
 import { RecipeItem } from '../../Models/RecipeModel';
-import { useEffect, useState, useRef } from 'react';
-import { useAppDispatch } from '../../Redux/hooks';
-import { resetShownRecipe } from '../../Redux/recipeSlice';
+import { useState } from 'react';
+// import { useAppDispatch } from '../../Redux/hooks';
+// import { resetShownRecipe } from '../../Redux/recipeSlice';
 import { useAppSelector } from '../../Redux/hooks';
 import { FaHeart, FaRegHeart, FaRegPlayCircle } from 'react-icons/fa';
 import Frame from '../../Components/Frame/Frame';
@@ -24,7 +24,7 @@ export default function Recipe() {
   } = recipe;
   //   const videoURL = `/api/proxy?url=${encodeURIComponent(recipe.videoURL)}`;
 
-  const dispatch = useAppDispatch();
+  //   const dispatch = useAppDispatch();
   //   const mountNumber = useRef({ count: 1 });
 
   //   useEffect(() => {
