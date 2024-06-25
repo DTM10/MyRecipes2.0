@@ -1,6 +1,7 @@
 import styles from './Corousel.module.scss';
 import { useAppSelector } from '../../Redux/hooks';
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { BORDER_VALUES } from '../../Models/Enums';
 
 import Card from '../Card/Card';
 
@@ -32,7 +33,12 @@ export default function Carousel() {
 
   return (
     <div className={styles.carousel}>
-      <Card recipe={carouselCards[currentIndex]} maxDescriptionSize={120} />
+      <Card
+        recipe={carouselCards[currentIndex]}
+        maxDescriptionSize={120}
+        isListCard={false}
+        border={BORDER_VALUES.DARK}
+      />
       <div className={styles.navController}>
         <div className={styles.navBtnsContainer}>
           {carouselCards.map((_, index) => (

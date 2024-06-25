@@ -13,13 +13,15 @@ export default function List() {
         <h2>{recipesTitle}</h2>
         <ul>
           {recipes.map((recipe) => (
-            <Card
-              recipe={recipe}
-              isListCard={true}
-              maxDescriptionSize={110}
-              key={recipe.id}
-              border={BORDER_VALUES.HOVERABLE}
-            />
+            <li>
+              <Card
+                recipe={recipe}
+                isListCard={true}
+                maxDescriptionSize={110}
+                key={recipe.id}
+                border={BORDER_VALUES.HOVERABLE}
+              />
+            </li>
           ))}
         </ul>
       </div>

@@ -1,4 +1,16 @@
-export class Recipe {
+export interface RecipeItem {
+  id: number;
+  title: string;
+  imgURL: string;
+  description: string;
+  instructions: string[];
+  credits: string[];
+  videoURL: string;
+  liked?: boolean;
+  ingredients: string[];
+}
+
+export class Recipe implements RecipeItem {
   constructor(
     public id: number,
     public title: string,
@@ -10,11 +22,4 @@ export class Recipe {
     public videoURL: string,
     public liked?: boolean
   ) {}
-
-  toggleLike() {
-    if (!this.liked) {
-      this.liked = true;
-    }
-    this.liked = !this.liked;
-  }
 }

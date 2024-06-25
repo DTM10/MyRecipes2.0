@@ -1,0 +1,48 @@
+@import '../../Styles/variables.scss';
+
+.recipe {
+  .recipeContainer {
+    padding: 15px;
+    background-color: $newTan5;
+    h3 {
+      padding-top: 15px;
+    }
+    .titleContainer {
+      display: grid;
+      grid-template-columns: 1fr 60px;
+      gap: 15px;
+      .btnsContainer {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        button {
+          font-size: 24px;
+          &.like {
+            color: $orange;
+          }
+        }
+      }
+      .credits {
+      }
+    }
+    .group1 {
+      .mediaContainer {
+        video,
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+    .group2 {
+      ul,
+      ol {
+        list-style-position: inside;
+        font-size: $pMobile;
+        li {
+          padding: 3px 0;
+        }
+      }
+    }
+  }
+}

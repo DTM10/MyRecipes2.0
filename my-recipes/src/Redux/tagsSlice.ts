@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { Tag } from '../Models/Tag';
+import { TagItem } from '../Models/Tag';
 
-const initialState: Tag[] = [];
+const initialState: TagItem[] = [];
 
 export const tagsSlice = createSlice({
   name: 'tags',
   initialState,
   reducers: {
-    setTags: (_, action: PayloadAction<Tag[]>) => {
+    setTags: (_, action: PayloadAction<TagItem[]>) => {
       return action.payload;
     },
   },

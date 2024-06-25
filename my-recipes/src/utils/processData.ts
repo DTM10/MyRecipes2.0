@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { Recipe } from '../Models/RecipeModel';
+import { RecipeItem } from '../Models/RecipeModel';
 import { TagsResults } from '../Models/TagsResults';
-import { Tag } from '../Models/Tag';
+import { TagItem } from '../Models/Tag';
 import { FeedsResults } from '../Models/Feeds';
 import { ListResults } from '../Models/ListResults';
 
@@ -13,7 +13,7 @@ export const processCarouselData = (rawCarouselData: AxiosResponse) => {
       (item) => item.category === 'Trending'
     );
     const trendingArray = trendingFiltered[0].items;
-    const tempData: Recipe[] = trendingArray.map((cardItem) => {
+    const tempData: RecipeItem[] = trendingArray.map((cardItem) => {
       const ingredients = cardItem.sections[0].components.map(
         (comp) => comp.raw_text
       );
@@ -21,18 +21,19 @@ export const processCarouselData = (rawCarouselData: AxiosResponse) => {
         (instr) => instr.display_text
       );
       const credits = cardItem.credits.map((item) => item.name);
-      const recipeInstance = new Recipe(
-        cardItem.id,
-        cardItem.name,
-        cardItem.thumbnail_url,
-        cardItem.description,
-        ingredients,
-        instructions,
-        credits,
-        cardItem.video_url
-      );
-      console.log(recipeInstance);
-      return recipeInstance;
+      const recipe: RecipeItem = {
+        id: cardItem.id,
+        title: cardItem.name,
+        imgURL: cardItem.thumbnail_url,
+        description: cardItem.description,
+        ingredients: ingredients,
+        instructions: instructions,
+        credits: credits,
+        videoURL: cardItem.video_url,
+      };
+
+      console.log(recipe);
+      return recipe;
     });
 
     return tempData;
@@ -51,14 +52,19 @@ export const processTagsData = (rawTagsData: AxiosResponse) => {
     );
 
     const tempTags = filteredTags.map((tag) => {
-      return new Tag(tag.display_name, tag.name, tag.id);
+      const tempTag: TagItem = {
+        displayName: tag.display_name,
+        name: tag.name,
+        id: tag.id,
+      };
+      return tempTag;
     });
 
     return tempTags;
   }
 };
 
-export const processListData = (rawListData: AxiosResponse): Recipe[] => {
+export const processListData = (rawListData: AxiosResponse): RecipeItem[] => {
   const data: ListResults = rawListData.data;
 
   if (data) {
@@ -70,16 +76,16 @@ export const processListData = (rawListData: AxiosResponse): Recipe[] => {
         (instruction) => instruction.display_text
       );
       const credits = recipe.credits.map((author) => author.name);
-      return new Recipe(
-        recipe.id,
-        recipe.name,
-        recipe.thumbnail_url,
-        recipe.description,
-        ingredients,
-        instructions,
-        credits,
-        recipe.video_url
-      );
+      return {
+        id: recipe.id,
+        title: recipe.name,
+        imgURL: recipe.thumbnail_url,
+        description: recipe.description,
+        ingredients: ingredients,
+        instructions: instructions,
+        credits: credits,
+        videoURL: recipe.video_url,
+      };
     });
     return processedRecipes;
   }

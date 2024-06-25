@@ -1,12 +1,15 @@
 import styles from './Card.module.scss';
-import { Recipe } from '../../Models/RecipeModel';
+import { RecipeItem } from '../../Models/RecipeModel';
 import { trimString } from '../../utils/stringUtils';
 import Frame from '../Frame/Frame';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { BORDER_VALUES } from '../../Models/Enums';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../Redux/hooks';
+import { setShownRecipe } from '../../Redux/recipeSlice';
 
 interface Card {
-  recipe: Recipe;
+  recipe: RecipeItem;
   size?: { width: number; height: number };
   maxDescriptionSize?: number;
   isListCard: boolean;
@@ -23,9 +26,14 @@ export default function Card({
   border,
 }: Card) {
   const { id, title, imgURL, description } = { ...recipe };
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleCardClick = () => {
     console.log('card clicked with recipe id: ', id);
+    dispatch(setShownRecipe(recipe));
+    navigate('/recipe');
+    // Pass the Recipe here
   };
 
   const treatedDescription = maxDescriptionSize
