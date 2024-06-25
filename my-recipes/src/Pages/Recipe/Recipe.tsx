@@ -19,9 +19,13 @@ export default function Recipe() {
     instructions,
     credits,
     ingredients,
-    videoURL,
+    // videoURL,
     liked,
   } = recipe;
+  const videoURL = `/api/proxy?url=${encodeURIComponent(recipe.videoURL)}`;
+
+  console.log('Can play URL is: ', ReactPlayer.canPlay(videoURL));
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
