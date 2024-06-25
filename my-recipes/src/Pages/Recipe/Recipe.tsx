@@ -1,6 +1,6 @@
 import styles from './Recipe.module.scss';
 import { RecipeItem } from '../../Models/RecipeModel';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../Redux/hooks';
 import { resetShownRecipe } from '../../Redux/recipeSlice';
 import { useAppSelector } from '../../Redux/hooks';
@@ -12,7 +12,7 @@ export default function Recipe() {
   const [isPlaying, setIsPlaying] = useState(false);
   const recipe: RecipeItem = useAppSelector((state) => state.recipe);
   const {
-    id,
+    // id,
     title,
     imgURL,
     description,

@@ -9,7 +9,7 @@ export default function Carousel() {
   const carouselCards = useAppSelector((state) => state.carouselRecipes);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const timeoutRef = useRef<null | number>(null);
+  const timeoutRef = useRef<null | NodeJS.Timeout>(null);
 
   const nextCard = useCallback(() => {
     setCurrentIndex((prevIndex) => {
@@ -28,6 +28,7 @@ export default function Carousel() {
       clearCurrentTimeout();
       nextCard();
     }, 3000);
+
     return clearCurrentTimeout;
   }, [currentIndex, nextCard]);
 
