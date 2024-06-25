@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../Redux/hooks';
 import { setShownRecipe } from '../../Redux/recipeSlice';
 
-interface Card {
+interface CardType {
   recipe: RecipeItem;
   size?: { width: number; height: number };
   maxDescriptionSize?: number;
@@ -24,13 +24,13 @@ export default function Card({
   isListCard,
   isLiked,
   border,
-}: Card) {
+}: CardType) {
   const { id, title, imgURL, description } = { ...recipe };
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleCardClick = () => {
-    console.log('card clicked with recipe id: ', id);
+    console.log('card clicked with recipe id: ', id, 'and name: ', title);
     dispatch(setShownRecipe(recipe));
     navigate('/recipe');
     // Pass the Recipe here

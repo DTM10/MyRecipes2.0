@@ -1,6 +1,6 @@
 import styles from './Recipe.module.scss';
 import { RecipeItem } from '../../Models/RecipeModel';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useAppDispatch } from '../../Redux/hooks';
 import { resetShownRecipe } from '../../Redux/recipeSlice';
 import { useAppSelector } from '../../Redux/hooks';
@@ -19,23 +19,24 @@ export default function Recipe() {
     instructions,
     credits,
     ingredients,
-    // videoURL,
+    videoURL,
     liked,
   } = recipe;
-  const videoURL = `/api/proxy?url=${encodeURIComponent(recipe.videoURL)}`;
-
-  console.log('Can play URL is: ', ReactPlayer.canPlay(videoURL));
+  //   const videoURL = `/api/proxy?url=${encodeURIComponent(recipe.videoURL)}`;
 
   const dispatch = useAppDispatch();
+  //   const mountNumber = useRef({ count: 1 });
 
-  useEffect(() => {
-    console.log('Recipe useEffect');
+  //   useEffect(() => {
+  //     console.log('recipe is: ', recipe);
 
-    return () => {
-      console.log('Recipe useEffect cleanup');
-      dispatch(resetShownRecipe());
-    };
-  }, [dispatch]);
+  //     mountNumber.current.count = mountNumber.current.count++;
+  //     return () => {
+  //       console.log('Recipe useEffect cleanup');
+  //       console.log(mountNumber);
+  //       dispatch(resetShownRecipe());
+  //     };
+  //   }, [dispatch]);
 
   const handleToggleIsPlaying = () => {
     console.log('handleToggleIsPlaying');
@@ -45,6 +46,10 @@ export default function Recipe() {
   const handleToggleLike = () => {
     console.log('handleToggleLike');
   };
+
+  if (!recipe.title) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.recipe}>
@@ -70,7 +75,7 @@ export default function Recipe() {
           </div>
           <div className={styles.group1}>
             <div className={styles.mediaContainer}>
-              {isPlaying ? (
+              {isPlaying && videoURL ? (
                 <ReactPlayer
                   url={videoURL}
                   playing={isPlaying}
