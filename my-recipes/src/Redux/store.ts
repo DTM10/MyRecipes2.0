@@ -3,6 +3,7 @@ import carouselReducer from './carouselSlice';
 import tagsReducer from './tagsSlice';
 import listReducer from './listSlice';
 import recipeReducer from './recipeSlice';
+import search from './search';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     tags: tagsReducer,
     listRecipes: listReducer,
     recipe: recipeReducer,
+    search: search,
 
     // favoriteRecipes: favoritesReducer,
   },

@@ -1,8 +1,10 @@
 import styles from './Header.module.scss';
 import logo from '../../assets/circular-logo-noBG.webp';
 import { CgProfile, CgSearch } from 'react-icons/cg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const navigate = useNavigate();
   const handleProfileClick = () => {
     console.log('handleProfileClick');
   };
@@ -15,9 +17,11 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.headerContainer}>
         <div className={styles.logoContainer}>
-          <a>
-            <img src={logo} alt="my-recipes-logo" className={styles.logo} />
-          </a>
+          <button onClick={() => navigate('/')}>
+            <a>
+              <img src={logo} alt="my-recipes-logo" className={styles.logo} />
+            </a>
+          </button>
           <h1>My Recipes</h1>
         </div>
         <nav>

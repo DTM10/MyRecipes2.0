@@ -3,13 +3,13 @@
 .header {
   background-color: $newTan;
   width: 100%;
-  height: $headerMobileHeight;
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: $headerMobileHeight;
   .headerContainer {
     padding: $paddingSmall;
     display: flex;

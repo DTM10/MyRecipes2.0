@@ -3,11 +3,10 @@ import Carousel from '../../Components/Carousel/Carousel';
 import Tag from '../../Components/Tag/Tag';
 import styles from './Home.module.scss';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { useAppDispatch } from '../../Redux/hooks';
 import { setCarouselRecipes } from '../../Redux/carouselSlice';
 import { setTags } from '../../Redux/tagsSlice';
 import { processCarouselData, processTagsData } from '../../utils/processData';
-import { useAppSelector } from '../../Redux/hooks';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks';
 
 export default function Home() {
   const tags = useAppSelector((state) => state.tags);

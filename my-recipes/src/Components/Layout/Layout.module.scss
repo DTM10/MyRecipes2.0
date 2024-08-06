@@ -13,4 +13,15 @@
     padding-bottom: 20px;
     flex: 1;
   }
+  .searchContainer {
+    padding: 10px $paddingSmallLateral;
+    width: calc(100% - 2 * $paddingSmallLateral);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    input {
+      width: 100%;
+    }
+  }
 }

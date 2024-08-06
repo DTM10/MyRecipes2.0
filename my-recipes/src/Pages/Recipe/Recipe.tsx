@@ -6,10 +6,22 @@ import { useState } from 'react';
 import { useAppSelector } from '../../Redux/hooks';
 import { FaHeart, FaRegHeart, FaRegPlayCircle } from 'react-icons/fa';
 import Frame from '../../Components/Frame/Frame';
-import ReactPlayer from 'react-player';
+// import ReactPlayer from 'react-player';
+// import ReactHlsPlayer from 'react-hls-player';
+// import videojs from 'video.js';
+// import type { VideoJsPlayer } from "@types/video.js";
+// import VideoPlayer from '../../Components/VideoPlayer';
+import 'video.js/dist/video-js.css';
+
+/* 
+
+  FIND A WAY TO PLAY THE VIDEO WITHOUT HAVING TROUBLE WITH CORS
+  
+*/
 
 export default function Recipe() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const recipe: RecipeItem = useAppSelector((state) => state.recipe);
   const {
     // id,
@@ -19,33 +31,26 @@ export default function Recipe() {
     instructions,
     credits,
     ingredients,
-    videoURL,
+    // videoURL,
     liked,
   } = recipe;
-  //   const videoURL = `/api/proxy?url=${encodeURIComponent(recipe.videoURL)}`;
-
-  //   const dispatch = useAppDispatch();
-  //   const mountNumber = useRef({ count: 1 });
-
-  //   useEffect(() => {
-  //     console.log('recipe is: ', recipe);
-
-  //     mountNumber.current.count = mountNumber.current.count++;
-  //     return () => {
-  //       console.log('Recipe useEffect cleanup');
-  //       console.log(mountNumber);
-  //       dispatch(resetShownRecipe());
-  //     };
-  //   }, [dispatch]);
-
-  const handleToggleIsPlaying = () => {
-    console.log('handleToggleIsPlaying');
-    setIsPlaying(!isPlaying);
-  };
 
   const handleToggleLike = () => {
-    console.log('handleToggleLike');
+    setIsLiked(!isLiked);
   };
+
+  // const handleToggleIsPlaying = () => {
+  //   console.log('handleToggleIsPlaying');
+  //   setIsPlaying(!isPlaying);
+  // };
+
+  //   const openVideoInNewTab = (url: string) => {
+  //     window.open(url, '_blank', 'noopener, noreferrer');
+  //   };
+
+  if (!recipe) {
+    return <div>Loading...</div>;
+  }
 
   if (!recipe.title) {
     return <div>Loading...</div>;
@@ -59,9 +64,9 @@ export default function Recipe() {
             <div className={styles.titleContainer}>
               <h2>{title}</h2>
               <div className={styles.btnsContainer}>
-                <button onClick={handleToggleIsPlaying}>
+                {/* <button onClick={handleToggleIsPlaying}>
                   <FaRegPlayCircle />
-                </button>
+                </button> */}
                 <button className={styles.like} onClick={handleToggleLike}>
                   {liked ? <FaHeart /> : <FaRegHeart />}
                 </button>
@@ -75,19 +80,13 @@ export default function Recipe() {
           </div>
           <div className={styles.group1}>
             <div className={styles.mediaContainer}>
-              {isPlaying && videoURL ? (
-                <ReactPlayer
-                  url={videoURL}
-                  playing={isPlaying}
-                  controls
-                  muted
-                  loop
-                  width="100%"
-                  height="100%"
-                />
+              {/* {isPlaying && videoURL ? (
+                // <video src={videoURL} autoPlay />
+                <VideoPlayer src={videoURL} />
               ) : (
                 <img src={imgURL} alt={`${title} image`} />
-              )}
+              )} */}
+              <img src={imgURL} alt={`${title} image`} />
             </div>
             <h3>Description</h3>
             <p>{description}</p>
