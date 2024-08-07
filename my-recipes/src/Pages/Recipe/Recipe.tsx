@@ -4,7 +4,7 @@ import { useState } from 'react';
 // import { useAppDispatch } from '../../Redux/hooks';
 // import { resetShownRecipe } from '../../Redux/recipeSlice';
 import { useAppSelector } from '../../Redux/hooks';
-import { FaHeart, FaRegHeart, FaRegPlayCircle } from 'react-icons/fa';
+import { FaHeart, FaRegHeart /*FaRegPlayCircle */ } from 'react-icons/fa';
 import Frame from '../../Components/Frame/Frame';
 // import ReactPlayer from 'react-player';
 // import ReactHlsPlayer from 'react-hls-player';
