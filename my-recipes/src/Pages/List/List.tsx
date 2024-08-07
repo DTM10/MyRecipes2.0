@@ -12,8 +12,8 @@ export default function List() {
       <div className={styles.listContainer}>
         <h2>{recipesTitle}</h2>
         <ul>
-          {recipes.map((recipe) => (
-            <li>
+          {recipes.map((recipe, inde) => (
+            <li key={`${recipe.id}-${inde}`} data-testid={recipe.id}>
               <Card
                 recipe={recipe}
                 isListCard={true}

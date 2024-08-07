@@ -2,15 +2,25 @@ import styles from './Header.module.scss';
 import logo from '../../assets/circular-logo-noBG.webp';
 import { CgProfile, CgSearch } from 'react-icons/cg';
 import { useNavigate } from 'react-router-dom';
+import { setIsSearching } from '../../Redux/search';
+import { useAppSelector, useAppDispatch } from '../../Redux/hooks';
 
 export default function Header() {
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+  const isSearching = useAppSelector((state) => state.search.isSearching);
+
   const handleProfileClick = () => {
     console.log('handleProfileClick');
   };
 
   const handleSearchClick = () => {
     console.log('handleSearchClick');
+    const searching = isSearching;
+    console.log('searching: ', searching);
+    console.log('!searching: ', !searching);
+    dispatch(setIsSearching(!searching));
   };
 
   return (

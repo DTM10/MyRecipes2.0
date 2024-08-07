@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import styles from './Layout.module.scss';
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks';
-import { setIsSeaching, setSearchParam } from '../../Redux/search';
+import { setIsSearching, setSearchParam } from '../../Redux/search';
 import { setListRecipes } from '../../Redux/listSlice';
 import { CgArrowRightO } from 'react-icons/cg';
 import axios, { AxiosResponse, AxiosError } from 'axios';
@@ -22,8 +22,8 @@ const headers = {
 };
 
 export default function Layout() {
-  const isSearching = useAppSelector((state) => state.search.isSearching);
   const dispatch = useAppDispatch();
+  const isSearching = useAppSelector((state) => state.search.isSearching);
   const searchParam = useAppSelector((state) => state.search.searchParam);
 
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ export default function Layout() {
             listTitle: searchParam,
           })
         );
-        setIsSeaching(false);
+        dispatch(setIsSearching(false));
         navigate('/list');
       })
       .catch((e: AxiosError) => {

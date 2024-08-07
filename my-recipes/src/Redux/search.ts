@@ -15,12 +15,14 @@ export const searchSlice = createSlice({
       return { ...state, searchParam: action.payload };
     },
 
-    setIsSeaching: (state, action: PayloadAction<boolean>) => {
-      return { ...state, isSeaching: action.payload };
+    setIsSearching: (state, action: PayloadAction<boolean>) => {
+      console.log('setIsSeaching: ', action.payload);
+
+      return { ...state, isSearching: action.payload };
     },
   },
 });
 
-export const { setSearchParam, setIsSeaching } = searchSlice.actions;
+export const { setSearchParam, setIsSearching } = searchSlice.actions;
 export const selectSearch = (state: RootState) => state.search;
 export default searchSlice.reducer;
